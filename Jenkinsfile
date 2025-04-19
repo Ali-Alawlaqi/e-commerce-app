@@ -23,4 +23,13 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            slackSend channel: '#devops', message: "✅ Build succeeded: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
+        }
+        failure {
+            slackSend channel: '#devops', message: "❌ Build failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
+        }
+    }
 }
